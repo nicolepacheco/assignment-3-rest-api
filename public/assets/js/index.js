@@ -6,6 +6,24 @@ let chooseDate = today
 
 function handleDateChange(e) {
     console.log(e.target.value)
+    const loadingContainer = document.getElementById("loading-container");
+    const responseContainer = document.getElementById("response-container");
+    loadingContainer.innerHTML = `
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    `
+    responseContainer.innerHTML = `
+        <h1 id="title-container"></h1>
+        <div id="media-container"></div>
+        <p id="description-container" class="lead"></p>
+        <p class="lead">
+          <a id="check-picture-button" href="" target="_blank"
+            class="btn btn-lg btn-light fw-bold border-white bg-white">Click here to
+            see the
+            image or video</a>
+        </p>
+    `
     chooseDate = e.target.value
     main()
 }
@@ -42,16 +60,21 @@ async function main() {
 
     const chooseDateContainer = document.getElementById('choose-date-container');
     chooseDateContainer.innerHTML = `
-        <label class="lead" for="pic-date">Choose a date:</label>
-        <input
-            type="date"
-            id="pic-date"
-            name="pic-date"
-            value="${chooseDate}"
-            min="1995-06-16"
-            max="${today}"
-            onchange="handleDateChange(event)" />
+        <h2 for="pic-date">Choose a date:</h2>
+        <h2>
+            <input
+                type="date"
+                id="pic-date"
+                name="pic-date"
+                value="${chooseDate}"
+                min="1995-06-16"
+                max="${today}"
+                onchange="handleDateChange(event)" />
+        </h2>
     `;
+
+    const loadingContainer = document.getElementById("loading-container");
+    loadingContainer.innerHTML = ''
 }
 
 main()
